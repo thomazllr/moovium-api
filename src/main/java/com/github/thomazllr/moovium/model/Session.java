@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(name = "session")
 public class Session {
 
     @Id
@@ -22,7 +23,7 @@ public class Session {
 
     private Integer seatsAvailable;
 
-    private Integer totalSeats;
+    private Integer totalSeats = 64;
 
     private String theaterName;
 
