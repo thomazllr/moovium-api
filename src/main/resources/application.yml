@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: moovium
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/moovium
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
