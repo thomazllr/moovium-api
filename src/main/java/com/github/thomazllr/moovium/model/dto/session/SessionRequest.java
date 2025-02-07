@@ -4,10 +4,11 @@ import com.github.thomazllr.moovium.model.Movie;
 import com.github.thomazllr.moovium.model.Session;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record SessionRequest(
         String movie,
-        LocalDate sessionTime,
+        LocalDateTime sessionTime,
         String theaterName) {
 
     public Session toSession(Movie movie) {

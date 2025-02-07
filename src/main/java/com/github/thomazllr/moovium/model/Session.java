@@ -1,11 +1,13 @@
 package com.github.thomazllr.moovium.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,9 +21,10 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonIgnore
     private Movie movie;
 
-    private LocalDate sessionTime;
+    private LocalDateTime sessionTime;
 
     private Integer seatsAvailable = 64;
 
@@ -30,15 +33,15 @@ public class Session {
     private String theaterName;
 
     @CreatedDate
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     public Session() {
     }
 
-    public Session(UUID id, Movie movie, LocalDate sessionTime, Integer seatsAvailable, Integer totalSeats, String theaterName, LocalDate createdAt, LocalDate updatedAt) {
+    public Session(UUID id, Movie movie, LocalDateTime sessionTime, Integer seatsAvailable, Integer totalSeats, String theaterName, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.movie = movie;
         this.sessionTime = sessionTime;
@@ -65,11 +68,11 @@ public class Session {
         this.movie = movie;
     }
 
-    public LocalDate getSessionTime() {
+    public LocalDateTime getSessionTime() {
         return sessionTime;
     }
 
-    public void setSessionTime(LocalDate sessionTime) {
+    public void setSessionTime(LocalDateTime sessionTime) {
         this.sessionTime = sessionTime;
     }
 
@@ -97,19 +100,19 @@ public class Session {
         this.theaterName = theaterName;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -38,17 +40,22 @@ public class Movie {
 
     private String status;
 
+    @OneToMany(mappedBy = "movie")
+    private List<Session> sessions;
+
     @CreatedDate
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
+
+
 
 
     public Movie() {
     }
 
-    public Movie(UUID id, String title, String synopsis, Integer duration, LocalDate releaseDate, Genre genre, String ageRating, String posterUrl, Boolean isFeatured, LocalDate featuredUntil, String status, LocalDate createdAt, LocalDate updatedAt) {
+    public Movie(UUID id, String title, String synopsis, Integer duration, LocalDate releaseDate, Genre genre, String ageRating, String posterUrl, Boolean isFeatured, LocalDate featuredUntil, String status, List<Session> sessions, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -60,6 +67,7 @@ public class Movie {
         this.isFeatured = isFeatured;
         this.featuredUntil = featuredUntil;
         this.status = status;
+        this.sessions = sessions;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -152,19 +160,27 @@ public class Movie {
         this.status = status;
     }
 
-    public LocalDate getCreatedAt() {
+    public List<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
+
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

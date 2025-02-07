@@ -31,7 +31,7 @@ public class SessionService {
     public Session create(SessionRequest request) {
         var movie = movieRepository.findById
                 (UUID.fromString(request.movie())).orElseThrow(() ->
-                new MovieNotFoundException("Não encontrei teu filme!"));
+                new MovieNotFoundException("The movie was not found."));
         var session = request.toSession(movie);
         validator.validator(session);
         return repository.save(session);
