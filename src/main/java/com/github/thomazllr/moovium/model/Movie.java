@@ -167,4 +167,6 @@ public class Movie {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }
