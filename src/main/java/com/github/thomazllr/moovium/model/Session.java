@@ -3,12 +3,14 @@ package com.github.thomazllr.moovium.model;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Table(name = "session")
+@EntityListeners(AuditingEntityListener.class)
 public class Session {
 
     @Id
@@ -21,7 +23,7 @@ public class Session {
 
     private LocalDate sessionTime;
 
-    private Integer seatsAvailable;
+    private Integer seatsAvailable = 64;
 
     private Integer totalSeats = 64;
 
