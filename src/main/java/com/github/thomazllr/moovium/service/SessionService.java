@@ -39,6 +39,6 @@ public class SessionService {
     }
 
     public List<SessionResponse> findAll() {
-        return repository.findAll().stream().map(SessionResponse::new).toList();
+        return repository.findAll().stream().map(SessionResponse::toResponse).toList();
     }
 }

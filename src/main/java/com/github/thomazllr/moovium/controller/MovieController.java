@@ -23,7 +23,7 @@ public class MovieController {
     public ResponseEntity<MovieResponse> save(@RequestBody MovieRequest request) {
         var savedMovie = service.create(request);
         URI location = URI.create("/movies/" + savedMovie.getId());
-        return ResponseEntity.created(location).body(new MovieResponse(savedMovie));
+        return ResponseEntity.created(location).body(MovieResponse.toResponse(savedMovie));
     }
 
     @GetMapping

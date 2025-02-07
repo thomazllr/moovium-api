@@ -1,5 +1,6 @@
 package com.github.thomazllr.moovium.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -11,8 +12,9 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "session_id")
+    @JsonIgnore
     private Session session;
 
     private String seatNumber;

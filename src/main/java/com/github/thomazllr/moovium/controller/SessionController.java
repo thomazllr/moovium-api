@@ -23,10 +23,10 @@ public class SessionController {
     }
 
     @PostMapping
-    public ResponseEntity<Session> save(@RequestBody SessionRequest request) {
+    public ResponseEntity<SessionResponse> save(@RequestBody SessionRequest request) {
         Session session = service.create(request);
         URI location = URI.create("/session/" + session.getId());
-        return ResponseEntity.created(location).body(session);
+        return ResponseEntity.created(location).body(SessionResponse.toResponse(session));
     }
 
     @GetMapping

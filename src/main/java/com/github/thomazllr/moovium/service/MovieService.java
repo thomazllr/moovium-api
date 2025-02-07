@@ -28,7 +28,7 @@ public class MovieService {
         return repository
                 .findAll()
                 .stream()
-                .map(MovieResponse::new)
+                .map(MovieResponse::toResponse)
                 .toList();
     }
 }

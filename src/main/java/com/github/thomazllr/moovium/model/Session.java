@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,9 +28,12 @@ public class Session {
 
     private Integer seatsAvailable = 64;
 
-    private Integer totalSeats = 64;
+    private Integer totalSeats = 10;
 
     private String theaterName;
+
+    @OneToMany(mappedBy = "session")
+    List<Ticket> tickets;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -40,13 +44,14 @@ public class Session {
     public Session() {
     }
 
-    public Session(UUID id, Movie movie, LocalDateTime sessionTime, Integer seatsAvailable, Integer totalSeats, String theaterName, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Session(UUID id, Movie movie, LocalDateTime sessionTime, Integer seatsAvailable, Integer totalSeats, String theaterName, List<Ticket> tickets, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.movie = movie;
         this.sessionTime = sessionTime;
         this.seatsAvailable = seatsAvailable;
         this.totalSeats = totalSeats;
         this.theaterName = theaterName;
+        this.tickets = tickets;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -97,6 +102,14 @@ public class Session {
 
     public void setTheaterName(String theaterName) {
         this.theaterName = theaterName;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public LocalDateTime getCreatedAt() {
