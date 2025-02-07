@@ -21,7 +21,6 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    @JsonIgnore
     private Movie movie;
 
     private LocalDateTime sessionTime;

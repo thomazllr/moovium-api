@@ -50,8 +50,6 @@ public class Movie {
     private LocalDateTime updatedAt;
 
 
-
-
     public Movie() {
     }
 

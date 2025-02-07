@@ -3,6 +3,7 @@ package com.github.thomazllr.moovium.service;
 import com.github.thomazllr.moovium.exceptions.MovieNotFoundException;
 import com.github.thomazllr.moovium.model.Session;
 import com.github.thomazllr.moovium.model.dto.session.SessionRequest;
+import com.github.thomazllr.moovium.model.dto.session.SessionResponse;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.validator.SessionValidator;
@@ -37,7 +38,7 @@ public class SessionService {
         return repository.save(session);
     }
 
-    public List<Session> findAll() {
-        return repository.findAll();
+    public List<SessionResponse> findAll() {
+        return repository.findAll().stream().map(SessionResponse::new).toList();
     }
 }

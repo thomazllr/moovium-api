@@ -2,6 +2,7 @@ package com.github.thomazllr.moovium.controller;
 
 import com.github.thomazllr.moovium.model.Session;
 import com.github.thomazllr.moovium.model.dto.session.SessionRequest;
+import com.github.thomazllr.moovium.model.dto.session.SessionResponse;
 import com.github.thomazllr.moovium.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class SessionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Session>> getAll() {
+    public ResponseEntity<List<SessionResponse>> getAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }
