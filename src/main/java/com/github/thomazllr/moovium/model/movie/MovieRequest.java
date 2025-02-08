@@ -1,7 +1,4 @@
-package com.github.thomazllr.moovium.model.dto.movie;
-
-import com.github.thomazllr.moovium.model.Genre;
-import com.github.thomazllr.moovium.model.Movie;
+package com.github.thomazllr.moovium.model.movie;
 
 import java.time.LocalDate;
 

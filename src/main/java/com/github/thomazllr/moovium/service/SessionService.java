@@ -1,16 +1,13 @@
 package com.github.thomazllr.moovium.service;
 
 import com.github.thomazllr.moovium.exceptions.MovieNotFoundException;
-import com.github.thomazllr.moovium.model.Session;
-import com.github.thomazllr.moovium.model.dto.session.SessionRequest;
-import com.github.thomazllr.moovium.model.dto.session.SessionResponse;
+import com.github.thomazllr.moovium.model.session.Session;
+import com.github.thomazllr.moovium.model.session.SessionRequest;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.validator.SessionValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,14 +17,11 @@ public class SessionService {
     private MovieRepository movieRepository;
     private SessionValidator validator;
 
-    @Autowired
     public SessionService(SessionRepository repository, MovieRepository movieRepository, SessionValidator validator) {
         this.repository = repository;
         this.movieRepository = movieRepository;
         this.validator = validator;
     }
-
-
 
     public Session create(SessionRequest request) {
         var movie = movieRepository.findById
@@ -38,7 +32,4 @@ public class SessionService {
         return repository.save(session);
     }
 
-    public List<SessionResponse> findAll() {
-        return repository.findAll().stream().map(SessionResponse::toResponse).toList();
-    }
 }

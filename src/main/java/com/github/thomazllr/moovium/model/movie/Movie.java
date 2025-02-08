@@ -1,5 +1,6 @@
-package com.github.thomazllr.moovium.model;
+package com.github.thomazllr.moovium.model.movie;
 
+import com.github.thomazllr.moovium.model.session.Session;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

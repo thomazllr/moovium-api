@@ -1,12 +1,13 @@
-package com.github.thomazllr.moovium.model;
+package com.github.thomazllr.moovium.model.session;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.model.seat.reservation.SeatReservation;
+import com.github.thomazllr.moovium.model.theater.Theater;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -26,14 +27,12 @@ public class Session {
 
     private LocalDateTime sessionTime;
 
-    private Integer seatsAvailable = 64;
-
-    private Integer totalSeats = 10;
-
-    private String theaterName;
-
     @OneToMany(mappedBy = "session")
-    List<Ticket> tickets;
+    List<SeatReservation> seats;
+
+    @ManyToOne
+    @JoinColumn(name = "theater_id", nullable = false)
+    private Theater theater;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -44,14 +43,12 @@ public class Session {
     public Session() {
     }
 
-    public Session(UUID id, Movie movie, LocalDateTime sessionTime, Integer seatsAvailable, Integer totalSeats, String theaterName, List<Ticket> tickets, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Session(UUID id, Movie movie, LocalDateTime sessionTime, List<SeatReservation> seats, Theater theater, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.movie = movie;
         this.sessionTime = sessionTime;
-        this.seatsAvailable = seatsAvailable;
-        this.totalSeats = totalSeats;
-        this.theaterName = theaterName;
-        this.tickets = tickets;
+        this.seats = seats;
+        this.theater = theater;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -80,36 +77,20 @@ public class Session {
         this.sessionTime = sessionTime;
     }
 
-    public Integer getSeatsAvailable() {
-        return seatsAvailable;
+    public List<SeatReservation> getSeatReservation() {
+        return seats;
     }
 
-    public void setSeatsAvailable(Integer seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+    public void setSeatReservations(List<SeatReservation> seats) {
+        this.seats = seats;
     }
 
-    public Integer getTotalSeats() {
-        return totalSeats;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTotalSeats(Integer totalSeats) {
-        this.totalSeats = totalSeats;
-    }
-
-    public String getTheaterName() {
-        return theaterName;
-    }
-
-    public void setTheaterName(String theaterName) {
-        this.theaterName = theaterName;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -127,4 +108,6 @@ public class Session {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }

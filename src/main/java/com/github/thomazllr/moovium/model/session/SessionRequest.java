@@ -1,9 +1,7 @@
-package com.github.thomazllr.moovium.model.dto.session;
+package com.github.thomazllr.moovium.model.session;
 
-import com.github.thomazllr.moovium.model.Movie;
-import com.github.thomazllr.moovium.model.Session;
+import com.github.thomazllr.moovium.model.movie.Movie;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record SessionRequest(
@@ -15,7 +13,6 @@ public record SessionRequest(
         Session session = new Session();
         session.setMovie(movie);
         session.setSessionTime(sessionTime);
-        session.setTheaterName(theaterName);
         return session;
     }
 }

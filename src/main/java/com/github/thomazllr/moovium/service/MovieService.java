@@ -1,8 +1,8 @@
 package com.github.thomazllr.moovium.service;
 
-import com.github.thomazllr.moovium.model.Movie;
-import com.github.thomazllr.moovium.model.dto.movie.MovieRequest;
-import com.github.thomazllr.moovium.model.dto.movie.MovieResponse;
+import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.model.movie.MovieRequest;
+import com.github.thomazllr.moovium.model.movie.MovieResponse;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +21,10 @@ public class MovieService {
 
     public Movie create(MovieRequest request) {
         return repository.save(request.toMovie());
-
     }
 
-    public List<MovieResponse> getAll() {
+
+    public List<MovieResponse> findAll() {
         return repository
                 .findAll()
                 .stream()

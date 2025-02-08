@@ -1,6 +1,4 @@
-package com.github.thomazllr.moovium.model.dto.ticket;
-
-import com.github.thomazllr.moovium.model.Ticket;
+package com.github.thomazllr.moovium.model.ticket;
 
 import java.math.BigDecimal;
 

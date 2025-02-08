@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.model;
+package com.github.thomazllr.moovium.model.movie;
 
 public enum Genre {
     ACTION,

@@ -1,7 +1,8 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.model.dto.movie.MovieRequest;
-import com.github.thomazllr.moovium.model.dto.movie.MovieResponse;
+import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.model.movie.MovieRequest;
+import com.github.thomazllr.moovium.model.movie.MovieResponse;
 import com.github.thomazllr.moovium.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,15 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<MovieResponse> save(@RequestBody MovieRequest request) {
-        var savedMovie = service.create(request);
-        URI location = URI.create("/movies/" + savedMovie.getId());
-        return ResponseEntity.created(location).body(MovieResponse.toResponse(savedMovie));
+        Movie movie = service.create(request);
+        URI location = URI.create("/movie/" + movie.getId());
+        return ResponseEntity.created(location).body(MovieResponse.toResponse(movie));
     }
 
     @GetMapping
     public ResponseEntity<List<MovieResponse>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(service.findAll());
     }
+
+
 }

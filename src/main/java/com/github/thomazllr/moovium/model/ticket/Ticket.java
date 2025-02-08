@@ -1,6 +1,8 @@
-package com.github.thomazllr.moovium.model;
+package com.github.thomazllr.moovium.model.ticket;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.thomazllr.moovium.model.seat.reservation.SeatReservation;
+import com.github.thomazllr.moovium.model.session.Session;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -12,10 +14,10 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "session_id")
+    @OneToOne
+    @JoinColumn(name = "reservation_id", unique = true)
     @JsonIgnore
-    private Session session;
+    private SeatReservation seatReservation;
 
     private String seatNumber;
 
@@ -29,9 +31,9 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(UUID id, Session session, String seatNumber, BigDecimal price, boolean isSold, String qrCode) {
+    public Ticket(UUID id, SeatReservation seatReservation, String seatNumber, BigDecimal price, boolean isSold, String qrCode) {
         this.id = id;
-        this.session = session;
+        this.seatReservation = seatReservation;
         this.seatNumber = seatNumber;
         this.price = price;
         this.isSold = isSold;
@@ -46,12 +48,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public Session getSession() {
-        return session;
+    public SeatReservation getSeatReservation() {
+        return seatReservation;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setSeatReservation(SeatReservation seatReservation) {
+        this.seatReservation = seatReservation;
     }
 
     public String getSeatNumber() {
