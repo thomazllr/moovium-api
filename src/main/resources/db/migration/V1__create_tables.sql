@@ -33,10 +33,10 @@ CREATE TABLE seat
     id          UUID PRIMARY KEY NOT NULL,
     theater_id  UUID             NOT NULL REFERENCES theater (id),
     seat_number VARCHAR(2)       NOT NULL,
-    row_number  VARCHAR(2)       NOT NULL,
+    row  VARCHAR(2)       NOT NULL,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (theater_id, row_number, seat_number)
+    UNIQUE (theater_id, row, seat_number)
 );
 
 CREATE TABLE session

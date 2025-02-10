@@ -21,7 +21,7 @@ public class Seat {
 
     private String seatNumber;
 
-    private String rowNumber;
+    private String row;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -32,13 +32,19 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(UUID id, Theater theater, String seatNumber, String rowNumber, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Seat(UUID id, Theater theater, String seatNumber, String row, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.theater = theater;
         this.seatNumber = seatNumber;
-        this.rowNumber = rowNumber;
+        this.row = row;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Seat(Theater theater, String seatNumber, String row) {
+        this.theater = theater;
+        this.seatNumber = seatNumber;
+        this.row = row;
     }
 
     public UUID getId() {
@@ -65,12 +71,12 @@ public class Seat {
         this.seatNumber = seatNumber;
     }
 
-    public String getRowNumber() {
-        return rowNumber;
+    public String getRow() {
+        return row;
     }
 
-    public void setRowNumber(String rowNumber) {
-        this.rowNumber = rowNumber;
+    public void setRow(String row) {
+        this.row = row;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface SeatRepository extends JpaRepository<Seat, UUID> {
 
-    boolean existsByTheaterAndSeatNumberAndRowNumber(Theater theater, String seatNumber, String rowNumber);
+    boolean existsByTheaterAndSeatNumberAndRow(Theater theater, String seatNumber, String row);
 }

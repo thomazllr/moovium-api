@@ -22,7 +22,7 @@ public class SeatValidator {
 
 
     boolean exists(Seat seat) {
-        return seatRepository.existsByTheaterAndSeatNumberAndRowNumber(seat.getTheater(), seat.getSeatNumber(), seat.getRowNumber());
+        return seatRepository.existsByTheaterAndSeatNumberAndRow(seat.getTheater(), seat.getSeatNumber(), seat.getRow());
 
     }
 }

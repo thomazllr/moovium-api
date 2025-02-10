@@ -8,13 +8,13 @@ public record SeatReservationResponse(String movie,
                                       LocalDateTime sessionTime,
                                       String theater,
                                       String seatNumber,
-                                      String rowNumber) {
+                                      String row) {
     public static SeatReservationResponse toResponse(SeatReservation reservation) {
         return new SeatReservationResponse(
                 reservation.getSession().getMovie().getTitle(),
                 reservation.getSession().getSessionTime(),
                 reservation.getSession().getTheater().getName(),
                 reservation.getSeat().getSeatNumber(),
-                reservation.getSeat().getRowNumber());
+                reservation.getSeat().getRow());
     }
 }
