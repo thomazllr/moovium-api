@@ -5,6 +5,7 @@ import com.github.thomazllr.moovium.entity.Session;
 import com.github.thomazllr.moovium.entity.Theater;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public record SessionRequest(
         String movie,
@@ -16,6 +17,7 @@ public record SessionRequest(
         session.setMovie(movie);
         session.setSessionTime(sessionTime);
         session.setTheater(theater);
+        session.setReservations(new ArrayList<>());
         return session;
     }
 }
