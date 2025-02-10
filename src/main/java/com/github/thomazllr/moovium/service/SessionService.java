@@ -3,7 +3,7 @@ package com.github.thomazllr.moovium.service;
 import com.github.thomazllr.moovium.exceptions.MovieNotFoundException;
 import com.github.thomazllr.moovium.exceptions.TheaterNotFoundException;
 import com.github.thomazllr.moovium.entity.Session;
-import com.github.thomazllr.moovium.model.session.SessionRequest;
+import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.repository.TheaterRepository;

@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.model.movie;
+package com.github.thomazllr.moovium.entity.dto.movie;
 
 import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.Genre;

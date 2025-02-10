@@ -1,8 +1,8 @@
 package com.github.thomazllr.moovium.controller;
 
 import com.github.thomazllr.moovium.entity.Session;
-import com.github.thomazllr.moovium.model.session.SessionRequest;
-import com.github.thomazllr.moovium.model.session.SessionResponse;
+import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
+import com.github.thomazllr.moovium.entity.dto.session.SessionResponse;
 import com.github.thomazllr.moovium.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

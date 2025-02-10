@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.model.session;
+package com.github.thomazllr.moovium.entity.dto.session;
 
 import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.Session;

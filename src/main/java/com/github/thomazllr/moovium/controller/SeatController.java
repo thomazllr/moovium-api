@@ -1,13 +1,14 @@
 package com.github.thomazllr.moovium.controller;
 
 import com.github.thomazllr.moovium.entity.Seat;
-import com.github.thomazllr.moovium.model.seat.SeatRequest;
+import com.github.thomazllr.moovium.entity.dto.seat.SeatRequest;
+import com.github.thomazllr.moovium.entity.dto.seat.SeatResponse;
 import com.github.thomazllr.moovium.service.SeatService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/seat")
@@ -20,8 +21,14 @@ public class SeatController {
     }
 
     @PostMapping
-    public ResponseEntity<Seat> saveSeat(@RequestBody SeatRequest request) {
+    public ResponseEntity<SeatResponse> saveSeat(@RequestBody SeatRequest request) {
         Seat seat = service.create(request);
-        return ResponseEntity.ok(seat);
+        URI location = URI.create("/seat/" + seat.getId());
+        return ResponseEntity.created(location).body(SeatResponse.toResponse(seat));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SeatResponse>> getSeats() {
+        return ResponseEntity.ok(service.findAll().stream().map(SeatResponse::toResponse).toList());
     }
 }

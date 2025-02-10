@@ -1,7 +1,7 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.model.theater.TheaterRequest;
-import com.github.thomazllr.moovium.model.theater.TheaterResponse;
+import com.github.thomazllr.moovium.entity.dto.theater.TheaterRequest;
+import com.github.thomazllr.moovium.entity.dto.theater.TheaterResponse;
 import com.github.thomazllr.moovium.service.TheaterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

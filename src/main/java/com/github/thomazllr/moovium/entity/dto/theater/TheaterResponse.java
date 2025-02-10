@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.model.theater;
+package com.github.thomazllr.moovium.entity.dto.theater;
 
 import com.github.thomazllr.moovium.entity.Theater;
 

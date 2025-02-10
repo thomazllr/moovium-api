@@ -1,8 +1,8 @@
 package com.github.thomazllr.moovium.controller;
 
 import com.github.thomazllr.moovium.entity.Movie;
-import com.github.thomazllr.moovium.model.movie.MovieRequest;
-import com.github.thomazllr.moovium.model.movie.MovieResponse;
+import com.github.thomazllr.moovium.entity.dto.movie.MovieRequest;
+import com.github.thomazllr.moovium.entity.dto.movie.MovieResponse;
 import com.github.thomazllr.moovium.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
