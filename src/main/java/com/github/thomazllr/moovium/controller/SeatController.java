@@ -7,9 +7,9 @@ import com.github.thomazllr.moovium.service.SeatService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.List;
+import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
 @RestController
 @RequestMapping("/seat")
@@ -24,7 +24,7 @@ public class SeatController {
     @PostMapping
     public ResponseEntity<SeatResponse> saveSeat(@RequestBody @Valid SeatRequest request) {
         Seat seat = service.create(request);
-        URI location = URI.create("/seat/" + seat.getId());
+        URI location = generateHeaderLocation(seat.getId());
         return ResponseEntity.created(location).body(SeatResponse.toResponse(seat));
     }
 

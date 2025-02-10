@@ -33,7 +33,6 @@ public class SeatReservationService {
         reservation.setSeat(seat);
         reservation.setSession(session);
         reservation.setStatus(Status.SOLD);
-        session.getTheater().setCapacity(session.getTheater().getCapacity() - 1);
         return reservationRepository.save(reservation);
     }
 }

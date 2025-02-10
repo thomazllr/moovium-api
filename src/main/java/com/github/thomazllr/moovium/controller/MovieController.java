@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
+
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -23,7 +25,7 @@ public class MovieController {
     @PostMapping
     public ResponseEntity<MovieResponse> save(@RequestBody MovieRequest request) {
         Movie movie = service.create(request);
-        URI location = URI.create("/movie/" + movie.getId());
+        URI location = generateHeaderLocation(movie.getId());
         return ResponseEntity.created(location).body(MovieResponse.toResponse(movie));
     }
 

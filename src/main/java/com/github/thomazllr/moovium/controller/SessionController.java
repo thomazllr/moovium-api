@@ -12,6 +12,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 
+import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
+
 @RestController
 @RequestMapping("/session")
 public class SessionController {
@@ -26,7 +28,7 @@ public class SessionController {
     @PostMapping
     public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest request, Locale locale) {
         Session session = service.create(request);
-        URI location = URI.create("/session/" + session.getId());
+        URI location = generateHeaderLocation(session.getId());
         return ResponseEntity.created(location).body(SessionResponse.toResponse(session));
     }
 

@@ -19,7 +19,7 @@ public class SeatReservation {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "sessio  n_id")
+    @JoinColumn(name = "session_id")
     private Session session;
 
     @ManyToOne

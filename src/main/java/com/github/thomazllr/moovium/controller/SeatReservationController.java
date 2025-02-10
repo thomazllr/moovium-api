@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.net.URI;
+import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
 @RestController
 @RequestMapping("/reservation")
@@ -24,7 +24,7 @@ public class SeatReservationController {
     @PostMapping
     public ResponseEntity<SeatReservationResponse> save(@RequestBody SeatReservationRequest seatReservationRequest) {
         var reservation = service.save(seatReservationRequest);
-        URI location = URI.create("/reservation/" + reservation.getId());
+        URI location = generateHeaderLocation(reservation.getId());
         return ResponseEntity.created(location).body(SeatReservationResponse.toResponse(reservation));
 
     }

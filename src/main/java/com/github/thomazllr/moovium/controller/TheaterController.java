@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
+import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
+
 @RestController
 @RequestMapping("/theater")
 public class TheaterController {
@@ -24,7 +26,7 @@ public class TheaterController {
     @PostMapping
     ResponseEntity<TheaterResponse> save(@RequestBody TheaterRequest request) {
         var theater = service.create(request);
-        URI location = URI.create("/theater/" + theater.getId());
+        URI location = generateHeaderLocation(theater.getId());
         return ResponseEntity.created(location).body(TheaterResponse.toResponse(theater));
     }
 }

@@ -54,7 +54,7 @@ CREATE TABLE seat_reservation
     id         UUID PRIMARY KEY NOT NULL,
     session_id UUID             NOT NULL REFERENCES session (id),
     seat_id    UUID             NOT NULL REFERENCES seat (id),
-    status     VARCHAR(10)      NOT NULL CHECK (status IN ('RESERVED', 'SOLD')),
+    status     VARCHAR(10)      NOT NULL CHECK (status IN ('AVAILABLE','RESERVED', 'SOLD')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (session_id, seat_id)
