@@ -1,5 +1,8 @@
 package com.github.thomazllr.moovium.model.movie;
 
+import com.github.thomazllr.moovium.entity.Movie;
+import com.github.thomazllr.moovium.entity.Genre;
+
 import java.time.LocalDate;
 
 public record MovieRequest(String title,

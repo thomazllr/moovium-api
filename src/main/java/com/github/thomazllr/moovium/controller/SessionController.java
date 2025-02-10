@@ -1,9 +1,16 @@
 package com.github.thomazllr.moovium.controller;
 
+import com.github.thomazllr.moovium.entity.Session;
+import com.github.thomazllr.moovium.model.session.SessionRequest;
+import com.github.thomazllr.moovium.model.session.SessionResponse;
 import com.github.thomazllr.moovium.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/session")
@@ -16,5 +23,16 @@ public class SessionController {
         this.service = service;
     }
 
+    @PostMapping
+    public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest request, Locale locale) {
+        Session session = service.create(request);
+        URI location = URI.create("/session/" + session.getId());
+        return ResponseEntity.created(location).body(SessionResponse.toResponse(session));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SessionResponse>> getAllSessions() {
+        return ResponseEntity.ok(service.findAll().stream().map(SessionResponse::toResponse).toList());
+    }
 
 }

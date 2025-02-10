@@ -1,8 +1,6 @@
-package com.github.thomazllr.moovium.model.ticket;
+package com.github.thomazllr.moovium.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.thomazllr.moovium.model.seat.reservation.SeatReservation;
-import com.github.thomazllr.moovium.model.session.Session;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

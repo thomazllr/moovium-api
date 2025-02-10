@@ -1,4 +1,5 @@
-package com.github.thomazllr.moovium.model.theater;
+package com.github.thomazllr.moovium.entity;
+
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,18 +11,23 @@ import java.util.UUID;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Theater {
+@Table(name = "seat_reservation")
+public class SeatReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private Session session;
 
-    private Integer capacity = 100;
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
     @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    private Status status;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -29,14 +35,14 @@ public class Theater {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Theater() {
+    public SeatReservation() {
     }
 
-    public Theater(UUID id, String name, Integer capacity, RoomType roomType, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SeatReservation(UUID id, Session session, Seat seat, Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.name = name;
-        this.capacity = capacity;
-        this.roomType = roomType;
+        this.session = session;
+        this.seat = seat;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -49,28 +55,28 @@ public class Theater {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Session getSession() {
+        return session;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSession(Session session) {
+        this.session = session;
     }
 
-    public Integer getCapacity() {
-        return capacity;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
-    public RoomType getRoomType() {
-        return roomType;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedAt() {

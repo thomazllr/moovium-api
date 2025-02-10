@@ -1,7 +1,7 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.model.theater.Theater;
 import com.github.thomazllr.moovium.model.theater.TheaterRequest;
+import com.github.thomazllr.moovium.model.theater.TheaterResponse;
 import com.github.thomazllr.moovium.service.TheaterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +22,9 @@ public class TheaterController {
     }
 
     @PostMapping
-    ResponseEntity<Theater> save(@RequestBody TheaterRequest request) {
+    ResponseEntity<TheaterResponse> save(@RequestBody TheaterRequest request) {
         var theater = service.create(request);
         URI location = URI.create("/theater/" + theater.getId());
-        return ResponseEntity.created(location).body(theater);
+        return ResponseEntity.created(location).body(TheaterResponse.toResponse(theater));
     }
 }

@@ -1,6 +1,6 @@
 package com.github.thomazllr.moovium.service;
 
-import com.github.thomazllr.moovium.model.ticket.Ticket;
+import com.github.thomazllr.moovium.entity.Ticket;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.repository.TicketRepository;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.model.movie.MovieRequest;
 import com.github.thomazllr.moovium.model.movie.MovieResponse;
 import com.github.thomazllr.moovium.service.MovieService;
@@ -29,7 +29,11 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<MovieResponse>> getAll() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(service
+                .findAll()
+                .stream()
+                .map(MovieResponse::toResponse)
+                .toList());
     }
 
 

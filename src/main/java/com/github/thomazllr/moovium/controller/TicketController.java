@@ -1,6 +1,6 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.model.ticket.Ticket;
+import com.github.thomazllr.moovium.entity.Ticket;
 import com.github.thomazllr.moovium.service.TicketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

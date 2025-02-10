@@ -1,8 +1,5 @@
-package com.github.thomazllr.moovium.model.seat.reservation;
+package com.github.thomazllr.moovium.entity;
 
-
-import com.github.thomazllr.moovium.model.seat.Seat;
-import com.github.thomazllr.moovium.model.session.Session;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,23 +10,18 @@ import java.util.UUID;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "seat_reservation")
-public class SeatReservation {
+public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "session_id")
-    private Session session;
+    private Theater theater;
 
-    @ManyToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    private String seatNumber;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String rowNumber;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -37,14 +29,14 @@ public class SeatReservation {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public SeatReservation() {
+    public Seat() {
     }
 
-    public SeatReservation(UUID id, Session session, Seat seat, Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Seat(UUID id, Theater theater, String seatNumber, String rowNumber, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.session = session;
-        this.seat = seat;
-        this.status = status;
+        this.theater = theater;
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -57,28 +49,28 @@ public class SeatReservation {
         this.id = id;
     }
 
-    public Session getSession() {
-        return session;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
-    public Seat getSeat() {
-        return seat;
+    public String getSeatNumber() {
+        return seatNumber;
     }
 
-    public void setSeat(Seat seat) {
-        this.seat = seat;
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
     }
 
-    public Status getStatus() {
-        return status;
+    public String getRowNumber() {
+        return rowNumber;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setRowNumber(String rowNumber) {
+        this.rowNumber = rowNumber;
     }
 
     public LocalDateTime getCreatedAt() {

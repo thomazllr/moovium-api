@@ -1,8 +1,7 @@
 package com.github.thomazllr.moovium.service;
 
-import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.model.movie.MovieRequest;
-import com.github.thomazllr.moovium.model.movie.MovieResponse;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +23,7 @@ public class MovieService {
     }
 
 
-    public List<MovieResponse> findAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(MovieResponse::toResponse)
-                .toList();
+    public List<Movie> findAll() {
+        return repository.findAll();
     }
 }

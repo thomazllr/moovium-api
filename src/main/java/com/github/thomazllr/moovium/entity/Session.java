@@ -1,8 +1,5 @@
-package com.github.thomazllr.moovium.model.session;
+package com.github.thomazllr.moovium.entity;
 
-import com.github.thomazllr.moovium.model.movie.Movie;
-import com.github.thomazllr.moovium.model.seat.reservation.SeatReservation;
-import com.github.thomazllr.moovium.model.theater.Theater;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,7 +25,7 @@ public class Session {
     private LocalDateTime sessionTime;
 
     @OneToMany(mappedBy = "session")
-    List<SeatReservation> seats;
+    List<SeatReservation> reservations;
 
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
@@ -43,11 +40,11 @@ public class Session {
     public Session() {
     }
 
-    public Session(UUID id, Movie movie, LocalDateTime sessionTime, List<SeatReservation> seats, Theater theater, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Session(UUID id, Movie movie, LocalDateTime sessionTime, List<SeatReservation> reservations, Theater theater, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.movie = movie;
         this.sessionTime = sessionTime;
-        this.seats = seats;
+        this.reservations = reservations;
         this.theater = theater;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -77,12 +74,12 @@ public class Session {
         this.sessionTime = sessionTime;
     }
 
-    public List<SeatReservation> getSeatReservation() {
-        return seats;
+    public List<SeatReservation> getReservations() {
+        return reservations;
     }
 
-    public void setSeatReservations(List<SeatReservation> seats) {
-        this.seats = seats;
+    public void setReservations(List<SeatReservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Theater getTheater() {

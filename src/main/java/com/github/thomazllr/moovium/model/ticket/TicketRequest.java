@@ -1,6 +1,6 @@
 //package com.github.thomazllr.moovium.model.ticket;
 //
-//import com.github.thomazllr.moovium.model.session.Session;
+//import com.github.thomazllr.moovium.entity.Session;
 //
 //import java.math.BigDecimal;
 //

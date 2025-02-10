@@ -1,7 +1,7 @@
 package com.github.thomazllr.moovium.validator;
 
-import com.github.thomazllr.moovium.model.movie.Movie;
-import com.github.thomazllr.moovium.model.session.Session;
+import com.github.thomazllr.moovium.entity.Movie;
+import com.github.thomazllr.moovium.entity.Session;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import org.springframework.stereotype.Component;
 

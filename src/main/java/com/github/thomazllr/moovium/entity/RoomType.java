@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.model.theater;
+package com.github.thomazllr.moovium.entity;
 
 public enum RoomType {
     IMAX,

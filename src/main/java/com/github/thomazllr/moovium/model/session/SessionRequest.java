@@ -1,18 +1,21 @@
 package com.github.thomazllr.moovium.model.session;
 
-import com.github.thomazllr.moovium.model.movie.Movie;
+import com.github.thomazllr.moovium.entity.Movie;
+import com.github.thomazllr.moovium.entity.Session;
+import com.github.thomazllr.moovium.entity.Theater;
 
 import java.time.LocalDateTime;
 
 public record SessionRequest(
         String movie,
         LocalDateTime sessionTime,
-        String theaterName) {
+        String theater) {
 
-    public Session toSession(Movie movie) {
+    public Session toSession(Movie movie, Theater theater) {
         Session session = new Session();
         session.setMovie(movie);
         session.setSessionTime(sessionTime);
+        session.setTheater(theater);
         return session;
     }
 }

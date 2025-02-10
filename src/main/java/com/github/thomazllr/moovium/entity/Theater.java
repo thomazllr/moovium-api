@@ -1,6 +1,5 @@
-package com.github.thomazllr.moovium.model.seat;
+package com.github.thomazllr.moovium.entity;
 
-import com.github.thomazllr.moovium.model.theater.Theater;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,18 +10,18 @@ import java.util.UUID;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Seat {
+public class Theater {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    private Theater theater;
+    private String name;
 
-    private String seatNumber;
+    private Integer capacity = 100;
 
-    private String rowNumber;
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -30,14 +29,14 @@ public class Seat {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Seat() {
+    public Theater() {
     }
 
-    public Seat(UUID id, Theater theater, String seatNumber, String rowNumber, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Theater(UUID id, String name, Integer capacity, RoomType roomType, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.theater = theater;
-        this.seatNumber = seatNumber;
-        this.rowNumber = rowNumber;
+        this.name = name;
+        this.capacity = capacity;
+        this.roomType = roomType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -50,28 +49,28 @@ public class Seat {
         this.id = id;
     }
 
-    public Theater getTheater() {
-        return theater;
+    public String getName() {
+        return name;
     }
 
-    public void setTheater(Theater theater) {
-        this.theater = theater;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSeatNumber() {
-        return seatNumber;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public String getRowNumber() {
-        return rowNumber;
+    public RoomType getRoomType() {
+        return roomType;
     }
 
-    public void setRowNumber(String rowNumber) {
-        this.rowNumber = rowNumber;
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -1,6 +1,6 @@
 package com.github.thomazllr.moovium.service;
 
-import com.github.thomazllr.moovium.model.theater.Theater;
+import com.github.thomazllr.moovium.entity.Theater;
 import com.github.thomazllr.moovium.model.theater.TheaterRequest;
 import com.github.thomazllr.moovium.repository.TheaterRepository;
 import org.springframework.stereotype.Service;
