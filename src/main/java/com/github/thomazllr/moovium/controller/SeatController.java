@@ -4,6 +4,7 @@ import com.github.thomazllr.moovium.entity.Seat;
 import com.github.thomazllr.moovium.entity.dto.seat.SeatRequest;
 import com.github.thomazllr.moovium.entity.dto.seat.SeatResponse;
 import com.github.thomazllr.moovium.service.SeatService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class SeatController {
     }
 
     @PostMapping
-    public ResponseEntity<SeatResponse> saveSeat(@RequestBody SeatRequest request) {
+    public ResponseEntity<SeatResponse> saveSeat(@RequestBody @Valid SeatRequest request) {
         Seat seat = service.create(request);
         URI location = URI.create("/seat/" + seat.getId());
         return ResponseEntity.created(location).body(SeatResponse.toResponse(seat));
