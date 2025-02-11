@@ -33,7 +33,7 @@ CREATE TABLE seat
     id          UUID PRIMARY KEY NOT NULL,
     theater_id  UUID             NOT NULL REFERENCES theater (id),
     seat_number VARCHAR(2)       NOT NULL,
-    row  VARCHAR(2)       NOT NULL,
+    row         VARCHAR(2)       NOT NULL,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (theater_id, row, seat_number)
@@ -51,12 +51,13 @@ CREATE TABLE session
 
 CREATE TABLE seat_reservation
 (
-    id         UUID PRIMARY KEY NOT NULL,
-    session_id UUID             NOT NULL REFERENCES session (id),
-    seat_id    UUID             NOT NULL REFERENCES seat (id),
-    status     VARCHAR(10)      NOT NULL CHECK (status IN ('AVAILABLE','RESERVED', 'SOLD')),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id                     UUID PRIMARY KEY NOT NULL,
+    session_id             UUID             NOT NULL REFERENCES session (id),
+    seat_id                UUID             NOT NULL REFERENCES seat (id),
+    status                 VARCHAR(10)      NOT NULL CHECK (status IN ('AVAILABLE', 'RESERVED', 'SOLD')),
+    reservation_expiration TIMESTAMP        NOT NULL,
+    created_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (session_id, seat_id)
 );
 

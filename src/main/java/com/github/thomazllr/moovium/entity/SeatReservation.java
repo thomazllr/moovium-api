@@ -29,6 +29,8 @@ public class SeatReservation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private LocalDateTime reservationExpiration;
+
     @CreatedDate
     private LocalDateTime createdAt;
 
@@ -38,11 +40,12 @@ public class SeatReservation {
     public SeatReservation() {
     }
 
-    public SeatReservation(UUID id, Session session, Seat seat, Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public SeatReservation(UUID id, Session session, Seat seat, Status status, LocalDateTime reservationExpiration, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.session = session;
         this.seat = seat;
         this.status = status;
+        this.reservationExpiration = reservationExpiration;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -77,6 +80,14 @@ public class SeatReservation {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getReservationExpiration() {
+        return reservationExpiration;
+    }
+
+    public void setReservationExpiration(LocalDateTime reservationExpiration) {
+        this.reservationExpiration = reservationExpiration;
     }
 
     public LocalDateTime getCreatedAt() {

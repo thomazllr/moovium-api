@@ -4,11 +4,11 @@ import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationR
 import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationResponse;
 import com.github.thomazllr.moovium.service.SeatReservationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.net.URI;
+import java.util.List;
+
 import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
 @RestController
@@ -22,10 +22,15 @@ public class SeatReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<SeatReservationResponse> save(@RequestBody SeatReservationRequest seatReservationRequest) {
-        var reservation = service.save(seatReservationRequest);
+    public ResponseEntity<SeatReservationResponse> reserve(@RequestBody SeatReservationRequest seatReservationRequest) {
+        var reservation = service.reserve(seatReservationRequest);
         URI location = generateHeaderLocation(reservation.getId());
         return ResponseEntity.created(location).body(SeatReservationResponse.toResponse(reservation));
-
     }
+
+    @GetMapping
+    public ResponseEntity<List<SeatReservationResponse>> getAll() {
+        return ResponseEntity.ok(service.findAll().stream().map(SeatReservationResponse::toResponse).toList());
+    }
+
 }
