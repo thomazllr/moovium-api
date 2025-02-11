@@ -8,6 +8,7 @@ import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationR
 import com.github.thomazllr.moovium.repository.SeatRepository;
 import com.github.thomazllr.moovium.repository.SeatReservationRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
+import com.github.thomazllr.moovium.validator.SeatReservationValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -19,11 +20,13 @@ public class SeatReservationService {
     private SeatReservationRepository reservationRepository;
     private SessionRepository sessionRepository;
     private SeatRepository seatRepository;
+    private SeatReservationValidator validator;
 
-    public SeatReservationService(SeatReservationRepository reservationRepository, SessionRepository sessionRepository, SeatRepository seatRepository) {
+    public SeatReservationService(SeatReservationRepository reservationRepository, SessionRepository sessionRepository, SeatRepository seatRepository, SeatReservationValidator validator) {
         this.reservationRepository = reservationRepository;
         this.sessionRepository = sessionRepository;
         this.seatRepository = seatRepository;
+        this.validator = validator;
     }
 
     public SeatReservation save(SeatReservationRequest request) {
@@ -33,6 +36,7 @@ public class SeatReservationService {
         reservation.setSeat(seat);
         reservation.setSession(session);
         reservation.setStatus(Status.SOLD);
+        validator.validate(reservation);
         return reservationRepository.save(reservation);
     }
 }
