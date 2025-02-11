@@ -4,6 +4,8 @@ import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.dto.movie.MovieRequest;
 import com.github.thomazllr.moovium.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +25,8 @@ public class MovieService {
     }
 
 
-    public List<Movie> findAll() {
-        return repository.findAll();
+    public Page<Movie> findAll(Integer page, Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return repository.findAll(pageRequest);
     }
 }
