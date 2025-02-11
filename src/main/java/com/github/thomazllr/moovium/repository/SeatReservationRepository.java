@@ -8,11 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface SeatReservationRepository extends JpaRepository<SeatReservation, UUID> {
 
     boolean existsBySessionAndSeatAndStatus(Session session, Seat seat, Status status);
+    List<SeatReservation> findBySession(Session session);
 
     @Query(value = "SELECT COUNT(*) FROM seat_reservation", nativeQuery = true)
     long countAll();

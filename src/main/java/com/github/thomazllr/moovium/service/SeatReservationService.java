@@ -73,4 +73,10 @@ public class SeatReservationService {
     public List<SeatReservation> findAll() {
         return reservationRepository.findAll();
     }
+
+    public List<SeatReservation> getReservationsForSession(String id) {
+        Session session = sessionRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+        return reservationRepository.findBySession(session);
+    }
 }
