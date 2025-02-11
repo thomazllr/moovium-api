@@ -33,8 +33,4 @@ public class SeatController {
         return ResponseEntity.ok(service.findAll().stream().map(SeatResponse::toResponse).toList());
     }
 
-    @GetMapping("/{idSession}")
-    public ResponseEntity<List<Seat>> getSeatsBySession(@PathVariable String idSession) {
-        return ResponseEntity.ok(service.getSeatsForSession(idSession));
-    }
 }

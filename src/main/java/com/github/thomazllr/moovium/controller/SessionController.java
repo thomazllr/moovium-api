@@ -37,4 +37,6 @@ public class SessionController {
         return ResponseEntity.ok(service.findAll().stream().map(SessionResponse::toResponse).toList());
     }
 
+
+
 }
