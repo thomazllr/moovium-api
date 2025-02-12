@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/session")
@@ -29,13 +31,14 @@ public class SessionSeatController {
         List<Seat> seats = service.getSeatsForSession(sessionId);
         List<SeatReservation> reservations = service.getsSeatsReservationForSession(sessionId);
 
+        Map<Seat, SeatReservation> reservationBySeat = reservations.stream()
+                .collect(Collectors.toMap(SeatReservation::getSeat, reservation -> reservation));
+
         List<SeatStatusDTO> seatStatusDTOS = seats.stream().map(seat ->  {
            var seatNumber = seat.getSeatNumber();
            var seatRow = seat.getRow();
-            Optional<SeatReservation> reservation = reservations.stream()
-                    .filter(r -> r.getSeat().equals(seat))
-                    .findFirst();
-            return reservation.map(seatReservation -> new SeatStatusDTO(seatNumber, seatRow, seatReservation.getStatus())).orElseGet(() -> new SeatStatusDTO(seatNumber, seatRow, Status.AVAILABLE));
+           var reservation = reservationBySeat.get(seat);
+           return Optional.ofNullable(reservation).map(r -> new SeatStatusDTO(seatNumber, seatRow, r.getStatus())).orElseGet(() -> new SeatStatusDTO(seatNumber, seatRow, Status.AVAILABLE));
         }).toList();
 
         return ResponseEntity.ok(seatStatusDTOS);
