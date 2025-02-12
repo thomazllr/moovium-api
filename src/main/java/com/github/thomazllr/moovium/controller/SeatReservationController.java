@@ -28,6 +28,11 @@ public class SeatReservationController {
         return ResponseEntity.created(location).body(SeatReservationResponse.toResponse(reservation));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<SeatReservationResponse> confirm(@PathVariable String id) {
+        return ResponseEntity.ok(SeatReservationResponse.toResponse(service.confirmPurchase(id)));
+    }
+
     @GetMapping
     public ResponseEntity<List<SeatReservationResponse>> getAll() {
         return ResponseEntity.ok(service.findAll().stream().map(SeatReservationResponse::toResponse).toList());

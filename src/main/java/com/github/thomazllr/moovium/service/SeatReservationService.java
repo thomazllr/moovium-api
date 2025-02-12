@@ -5,7 +5,6 @@ import com.github.thomazllr.moovium.entity.SeatReservation;
 import com.github.thomazllr.moovium.entity.Session;
 import com.github.thomazllr.moovium.entity.Status;
 import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationRequest;
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationResponse;
 import com.github.thomazllr.moovium.repository.SeatRepository;
 import com.github.thomazllr.moovium.repository.SeatReservationRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
@@ -47,8 +46,8 @@ public class SeatReservationService {
     }
 
     @Transactional
-    public SeatReservation confirmPurchase(UUID reservationId) {
-        SeatReservation reservation = reservationRepository.findById(reservationId)
+    public SeatReservation confirmPurchase(String reservationId) {
+        SeatReservation reservation = reservationRepository.findById(UUID.fromString(reservationId))
                 .orElseThrow(() -> new RuntimeException("Reservation not found"));
 
         if (reservation.getStatus() != Status.RESERVED) {
