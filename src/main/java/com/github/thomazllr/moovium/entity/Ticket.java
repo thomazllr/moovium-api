@@ -17,24 +17,18 @@ public class Ticket {
     @JsonIgnore
     private SeatReservation seatReservation;
 
-    private String seatNumber;
-
     @Column(precision = 18, scale = 2)
     private BigDecimal price;
-
-    private boolean isSold;
 
     private String qrCode;
 
     public Ticket() {
     }
 
-    public Ticket(UUID id, SeatReservation seatReservation, String seatNumber, BigDecimal price, boolean isSold, String qrCode) {
+    public Ticket(UUID id, SeatReservation seatReservation, BigDecimal price, String qrCode) {
         this.id = id;
         this.seatReservation = seatReservation;
-        this.seatNumber = seatNumber;
         this.price = price;
-        this.isSold = isSold;
         this.qrCode = qrCode;
     }
 
@@ -54,13 +48,6 @@ public class Ticket {
         this.seatReservation = seatReservation;
     }
 
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
 
     public BigDecimal getPrice() {
         return price;
@@ -70,13 +57,6 @@ public class Ticket {
         this.price = price;
     }
 
-    public boolean isSold() {
-        return isSold;
-    }
-
-    public void setSold(boolean sold) {
-        isSold = sold;
-    }
 
     public String getQrCode() {
         return qrCode;
@@ -84,5 +64,48 @@ public class Ticket {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    private Ticket(Builder builder) {
+        this.id = builder.id;
+        this.seatReservation = builder.seatReservation;
+        this.price = builder.price;
+        this.qrCode = builder.qrCode;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private UUID id;
+        private SeatReservation seatReservation;
+        private BigDecimal price;
+        private String qrCode;
+
+        public Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder seatReservation(SeatReservation seatReservation) {
+            this.seatReservation = seatReservation;
+            return this;
+        }
+
+
+        public Builder price(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder qrCode(String qrCode) {
+            this.qrCode = qrCode;
+            return this;
+        }
+
+        public Ticket build() {
+            return new Ticket(this);
+        }
     }
 }

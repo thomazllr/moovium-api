@@ -66,7 +66,7 @@ CREATE TABLE ticket
     id             UUID PRIMARY KEY NOT NULL,
     reservation_id UUID             NOT NULL REFERENCES seat_reservation (id),
     price          DECIMAL(18, 2)   NOT NULL,
-    qr_code        VARCHAR(255)     NOT NULL,
+    qr_code        text     NOT NULL,
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

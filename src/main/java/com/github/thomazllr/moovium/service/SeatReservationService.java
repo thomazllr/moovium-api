@@ -1,18 +1,17 @@
 package com.github.thomazllr.moovium.service;
 
-import com.github.thomazllr.moovium.entity.Seat;
-import com.github.thomazllr.moovium.entity.SeatReservation;
-import com.github.thomazllr.moovium.entity.Session;
-import com.github.thomazllr.moovium.entity.Status;
+import com.github.thomazllr.moovium.entity.*;
 import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationRequest;
 import com.github.thomazllr.moovium.repository.SeatRepository;
 import com.github.thomazllr.moovium.repository.SeatReservationRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
+import com.github.thomazllr.moovium.repository.TicketRepository;
 import com.github.thomazllr.moovium.validator.SeatReservationValidator;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -23,12 +22,16 @@ public class SeatReservationService {
     private SeatReservationRepository reservationRepository;
     private SessionRepository sessionRepository;
     private SeatRepository seatRepository;
+    private TicketRepository ticketRepository;
+    private QrCodeService qrCodeService;
     private SeatReservationValidator validator;
 
-    public SeatReservationService(SeatReservationRepository reservationRepository, SessionRepository sessionRepository, SeatRepository seatRepository, SeatReservationValidator validator) {
+    public SeatReservationService(SeatReservationRepository reservationRepository, SessionRepository sessionRepository, SeatRepository seatRepository, TicketRepository ticketRepository, QrCodeService qrCodeService, SeatReservationValidator validator) {
         this.reservationRepository = reservationRepository;
         this.sessionRepository = sessionRepository;
         this.seatRepository = seatRepository;
+        this.ticketRepository = ticketRepository;
+        this.qrCodeService = qrCodeService;
         this.validator = validator;
     }
 
@@ -57,6 +60,14 @@ public class SeatReservationService {
         if (reservation.getReservationExpiration().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Reservation expired");
         }
+
+        Ticket ticket = Ticket.builder()
+                .seatReservation(reservation)
+                .price(new BigDecimal("50.00"))
+                .qrCode("qrcode123")
+                .build();
+        ticket = ticketRepository.save(ticket);
+        ticket.setQrCode(qrCodeService.generateQRCode(ticket.getId()));
 
         reservation.setStatus(Status.SOLD);
         return reservationRepository.save(reservation);
