@@ -3,6 +3,8 @@ package com.github.thomazllr.moovium.service;
 import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.dto.movie.MovieRequest;
 import com.github.thomazllr.moovium.repository.MovieRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,7 @@ import java.util.List;
 @Service
 public class MovieService {
 
+    private static final Logger log = LoggerFactory.getLogger(MovieService.class);
     @Autowired
     private MovieRepository repository;
 
@@ -21,6 +24,7 @@ public class MovieService {
     }
 
     public Movie create(MovieRequest request) {
+        log.info("Creating a new movie");
         return repository.save(request.toMovie());
     }
 
