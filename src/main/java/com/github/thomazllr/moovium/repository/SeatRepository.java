@@ -1,7 +1,6 @@
 package com.github.thomazllr.moovium.repository;
 
 import com.github.thomazllr.moovium.entity.Seat;
-import com.github.thomazllr.moovium.entity.Session;
 import com.github.thomazllr.moovium.entity.Theater;
 import org.springframework.data.jpa.repository.JpaRepository;
 
