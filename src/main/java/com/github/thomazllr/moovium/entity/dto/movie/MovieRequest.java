@@ -1,7 +1,7 @@
 package com.github.thomazllr.moovium.entity.dto.movie;
 
-import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.Genre;
+import com.github.thomazllr.moovium.entity.Movie;
 
 import java.time.LocalDate;
 
@@ -17,20 +17,18 @@ public record MovieRequest(String title,
                            String status) {
 
     public Movie toMovie() {
-        Movie movie = new Movie();
-        movie.setTitle(title);
-        movie.setSynopsis(synopsis);
-        movie.setDuration(duration);
-        movie.setReleaseDate(releaseDate);
-        movie.setGenre(genre);
-        movie.setAgeRating(ageRating);
-        movie.setPosterUrl(posterUrl);
-        movie.setFeatured(isFeatured);
-        movie.setFeaturedUntil(featuredUntil);
-        movie.setStatus(status);
-        return movie;
+        return Movie.builder()
+                .title(title)
+                .synopsis(synopsis)
+                .duration(duration)
+                .releaseDate(releaseDate)
+                .genre(genre)
+                .ageRating(ageRating)
+                .posterUrl(posterUrl)
+                .isFeatured(isFeatured)
+                .featuredUntil(featuredUntil)
+                .status(status)
+                .build();
     }
 
-
-
-    }
+}

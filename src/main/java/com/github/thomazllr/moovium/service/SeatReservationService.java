@@ -7,6 +7,7 @@ import com.github.thomazllr.moovium.repository.SeatReservationRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.repository.TicketRepository;
 import com.github.thomazllr.moovium.validator.SeatReservationValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,23 +18,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class SeatReservationService {
 
-    private SeatReservationRepository reservationRepository;
-    private SessionRepository sessionRepository;
-    private SeatRepository seatRepository;
-    private TicketRepository ticketRepository;
-    private QrCodeService qrCodeService;
-    private SeatReservationValidator validator;
+    final private SeatReservationRepository reservationRepository;
+    final private SessionRepository sessionRepository;
+    final private SeatRepository seatRepository;
+    final private TicketRepository ticketRepository;
+    final private QrCodeService qrCodeService;
+    final private SeatReservationValidator validator;
 
-    public SeatReservationService(SeatReservationRepository reservationRepository, SessionRepository sessionRepository, SeatRepository seatRepository, TicketRepository ticketRepository, QrCodeService qrCodeService, SeatReservationValidator validator) {
-        this.reservationRepository = reservationRepository;
-        this.sessionRepository = sessionRepository;
-        this.seatRepository = seatRepository;
-        this.ticketRepository = ticketRepository;
-        this.qrCodeService = qrCodeService;
-        this.validator = validator;
-    }
 
     @Transactional
     public SeatReservation reserve(SeatReservationRequest request) {

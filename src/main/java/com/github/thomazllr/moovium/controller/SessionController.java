@@ -1,6 +1,6 @@
 package com.github.thomazllr.moovium.controller;
 
-import com.github.thomazllr.moovium.entity.Session;
+import com.github.thomazllr.moovium.mapper.SessionMapper;
 import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
 import com.github.thomazllr.moovium.entity.dto.session.SessionResponse;
 import com.github.thomazllr.moovium.service.SessionService;
@@ -27,14 +27,14 @@ public class SessionController {
 
     @PostMapping
     public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest request, Locale locale) {
-        Session session = service.create(request);
+        var session = service.create(request);
         URI location = generateHeaderLocation(session.getId());
-        return ResponseEntity.created(location).body(SessionResponse.toResponse(session));
+        return ResponseEntity.created(location).body(SessionMapper.toResponse(session));
     }
 
     @GetMapping
     public ResponseEntity<List<SessionResponse>> getAllSessions() {
-        return ResponseEntity.ok(service.findAll().stream().map(SessionResponse::toResponse).toList());
+        return ResponseEntity.ok(service.findAll().stream().map(SessionMapper::toResponse).toList());
     }
 
 
