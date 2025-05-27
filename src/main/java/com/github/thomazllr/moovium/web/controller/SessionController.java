@@ -1,33 +1,26 @@
-package com.github.thomazllr.moovium.controller;
-
-import com.github.thomazllr.moovium.mapper.SessionMapper;
-import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
-import com.github.thomazllr.moovium.entity.dto.session.SessionResponse;
+package com.github.thomazllr.moovium.web.controller;
+import com.github.thomazllr.moovium.web.mapper.SessionMapper;
+import com.github.thomazllr.moovium.web.dto.session.SessionRequest;
+import com.github.thomazllr.moovium.web.dto.session.SessionResponse;
 import com.github.thomazllr.moovium.service.SessionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.List;
-import java.util.Locale;
 
 import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/session")
 public class SessionController {
 
-    private SessionService service;
-
-    @Autowired
-    public SessionController(SessionService service) {
-        this.service = service;
-    }
+    private final SessionService service;
 
     @PostMapping
-    public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest request, Locale locale) {
-        var session = service.create(request);
+    public ResponseEntity<SessionResponse> getSession(@RequestBody SessionRequest request) {
+        var session = service.create(SessionMapper.fromRequest(request));
         URI location = generateHeaderLocation(session.getId());
         return ResponseEntity.created(location).body(SessionMapper.toResponse(session));
     }

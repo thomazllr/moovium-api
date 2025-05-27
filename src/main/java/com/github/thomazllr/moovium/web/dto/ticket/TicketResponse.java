@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.entity.dto.ticket;
+package com.github.thomazllr.moovium.web.dto.ticket;
 
 import com.github.thomazllr.moovium.entity.Ticket;
 

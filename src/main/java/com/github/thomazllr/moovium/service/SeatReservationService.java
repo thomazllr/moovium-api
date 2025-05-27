@@ -1,7 +1,7 @@
 package com.github.thomazllr.moovium.service;
 
 import com.github.thomazllr.moovium.entity.*;
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationRequest;
+import com.github.thomazllr.moovium.web.dto.seat.reservation.SeatReservationRequest;
 import com.github.thomazllr.moovium.repository.SeatRepository;
 import com.github.thomazllr.moovium.repository.SeatReservationRepository;
 import com.github.thomazllr.moovium.repository.SessionRepository;

@@ -1,25 +1,24 @@
-package com.github.thomazllr.moovium.controller;
+package com.github.thomazllr.moovium.web.controller;
 
 import com.github.thomazllr.moovium.entity.Seat;
-import com.github.thomazllr.moovium.entity.dto.seat.SeatRequest;
-import com.github.thomazllr.moovium.entity.dto.seat.SeatResponse;
+import com.github.thomazllr.moovium.web.dto.seat.SeatRequest;
+import com.github.thomazllr.moovium.web.dto.seat.SeatResponse;
 import com.github.thomazllr.moovium.service.SeatService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
+
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/seat")
 public class SeatController {
 
-    private SeatService service;
-
-    public SeatController(SeatService service) {
-        this.service = service;
-    }
+    private final SeatService service;
 
     @PostMapping
     public ResponseEntity<SeatResponse> saveSeat(@RequestBody @Valid SeatRequest request) {

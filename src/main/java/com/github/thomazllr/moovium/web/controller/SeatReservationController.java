@@ -1,8 +1,9 @@
-package com.github.thomazllr.moovium.controller;
+package com.github.thomazllr.moovium.web.controller;
 
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationRequest;
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationResponse;
+import com.github.thomazllr.moovium.web.dto.seat.reservation.SeatReservationRequest;
+import com.github.thomazllr.moovium.web.dto.seat.reservation.SeatReservationResponse;
 import com.github.thomazllr.moovium.service.SeatReservationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +12,12 @@ import java.util.List;
 
 import static com.github.thomazllr.moovium.util.UriUtil.generateHeaderLocation;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/reservation")
 public class SeatReservationController {
 
-    public SeatReservationService service;
-
-    public SeatReservationController(SeatReservationService service) {
-        this.service = service;
-    }
+    private final SeatReservationService service;
 
     @PostMapping
     public ResponseEntity<SeatReservationResponse> reserve(@RequestBody SeatReservationRequest seatReservationRequest) {

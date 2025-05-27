@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.entity.dto.seat.reservation;
+package com.github.thomazllr.moovium.web.dto.seat.reservation;
 
 import com.github.thomazllr.moovium.entity.Seat;
 import com.github.thomazllr.moovium.entity.SeatReservation;

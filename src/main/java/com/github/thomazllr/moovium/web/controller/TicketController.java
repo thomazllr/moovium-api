@@ -1,7 +1,8 @@
-package com.github.thomazllr.moovium.controller;
+package com.github.thomazllr.moovium.web.controller;
 
 import com.github.thomazllr.moovium.entity.Ticket;
 import com.github.thomazllr.moovium.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Base64;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/ticket")
 public class TicketController {
 
-    private TicketService service;
-
-    public TicketController(TicketService service) {
-        this.service = service;
-    }
+    private final TicketService service;
 
     @GetMapping("/tickets/{id}/qr-image")
     public ResponseEntity<byte[]> getQRCodeImage(@PathVariable String id) {

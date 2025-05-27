@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.entity.dto.session;
+package com.github.thomazllr.moovium.web.dto.session;
 
 import java.time.LocalDateTime;
 

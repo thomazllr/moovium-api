@@ -1,17 +1,15 @@
-package com.github.thomazllr.moovium.mapper;
+package com.github.thomazllr.moovium.web.mapper;
 
 import com.github.thomazllr.moovium.entity.Movie;
 import com.github.thomazllr.moovium.entity.Session;
 import com.github.thomazllr.moovium.entity.Theater;
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationResponseForMovie;
-import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
-import com.github.thomazllr.moovium.entity.dto.session.SessionResponse;
-import org.springframework.stereotype.Component;
+import com.github.thomazllr.moovium.web.dto.seat.reservation.SeatReservationResponseForMovie;
+import com.github.thomazllr.moovium.web.dto.session.SessionRequest;
+import com.github.thomazllr.moovium.web.dto.session.SessionResponse;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-@Component
 public class SessionMapper {
 
     public static Session fromRequest(SessionRequest request) {
@@ -20,7 +18,6 @@ public class SessionMapper {
         movie.setId(UUID.fromString(request.movie()));
         var theater = new Theater();
         theater.setId(UUID.fromString(request.theater()));
-
         Session session = new Session();
         session.setMovie(movie);
         session.setSessionTime(request.sessionTime());

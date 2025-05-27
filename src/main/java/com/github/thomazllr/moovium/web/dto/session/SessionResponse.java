@@ -1,6 +1,6 @@
-package com.github.thomazllr.moovium.entity.dto.session;
+package com.github.thomazllr.moovium.web.dto.session;
 
-import com.github.thomazllr.moovium.entity.dto.seat.reservation.SeatReservationResponseForMovie;
+import com.github.thomazllr.moovium.web.dto.seat.reservation.SeatReservationResponseForMovie;
 
 import java.time.LocalDateTime;
 import java.util.List;

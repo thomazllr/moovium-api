@@ -1,8 +1,6 @@
 package com.github.thomazllr.moovium.service;
 
 import com.github.thomazllr.moovium.entity.Session;
-import com.github.thomazllr.moovium.mapper.SessionMapper;
-import com.github.thomazllr.moovium.entity.dto.session.SessionRequest;
 import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.validator.SessionValidator;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +16,9 @@ public class SessionService {
 
     final private SessionValidator validator;
 
-    public Session create(SessionRequest request) {
-        var session = SessionMapper.fromRequest(request);
-        validator.validator(session);
-        return repository.save(session);
+    public Session create(Session request) {
+        validator.validator(request);
+        return repository.save(request);
     }
 
     public List<Session> findAll() {

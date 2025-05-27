@@ -1,10 +1,11 @@
-package com.github.thomazllr.moovium.controller;
+package com.github.thomazllr.moovium.web.controller;
 
 import com.github.thomazllr.moovium.entity.Seat;
 import com.github.thomazllr.moovium.entity.SeatReservation;
 import com.github.thomazllr.moovium.entity.Status;
-import com.github.thomazllr.moovium.entity.dto.seat.SeatStatusDTO;
+import com.github.thomazllr.moovium.web.dto.seat.SeatStatusDTO;
 import com.github.thomazllr.moovium.service.SessionSeatService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +17,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/session")
 public class SessionSeatController {
 
-    private SessionSeatService service;
-
-    public SessionSeatController(SessionSeatService service) {
-        this.service = service;
-    }
+    private final SessionSeatService service;
 
     @GetMapping("/{sessionId}/seats")
     public ResponseEntity<List<SeatStatusDTO>> findAllSeatsBySession(@PathVariable String sessionId) {

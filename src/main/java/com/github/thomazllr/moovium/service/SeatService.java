@@ -1,12 +1,9 @@
 package com.github.thomazllr.moovium.service;
 
 import com.github.thomazllr.moovium.entity.Seat;
-import com.github.thomazllr.moovium.entity.dto.seat.SeatRequest;
-import com.github.thomazllr.moovium.entity.dto.seat.SeatStatusDTO;
+import com.github.thomazllr.moovium.web.dto.seat.SeatRequest;
 import com.github.thomazllr.moovium.exceptions.TheaterNotFoundException;
 import com.github.thomazllr.moovium.repository.SeatRepository;
-import com.github.thomazllr.moovium.repository.SeatReservationRepository;
-import com.github.thomazllr.moovium.repository.SessionRepository;
 import com.github.thomazllr.moovium.repository.TheaterRepository;
 import com.github.thomazllr.moovium.validator.SeatValidator;
 import org.springframework.stereotype.Service;
