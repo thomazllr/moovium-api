@@ -2,7 +2,7 @@ package com.github.thomazllr.moovium.service;
 
 import com.github.thomazllr.moovium.entity.Seat;
 import com.github.thomazllr.moovium.web.dto.seat.SeatRequest;
-import com.github.thomazllr.moovium.exceptions.TheaterNotFoundException;
+import com.github.thomazllr.moovium.web.exception.TheaterNotFoundException;
 import com.github.thomazllr.moovium.repository.SeatRepository;
 import com.github.thomazllr.moovium.repository.TheaterRepository;
 import com.github.thomazllr.moovium.validator.SeatValidator;

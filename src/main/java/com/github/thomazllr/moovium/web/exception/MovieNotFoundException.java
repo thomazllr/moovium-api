@@ -1,4 +1,4 @@
-package com.github.thomazllr.moovium.exceptions;
+package com.github.thomazllr.moovium.web.exception;
 
 public class MovieNotFoundException extends RuntimeException{
 
