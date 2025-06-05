@@ -70,7 +70,6 @@ CREATE TABLE "user"
     nickname      VARCHAR(50),
     avatar_url    VARCHAR(255),
     bio           TEXT,
-    role          VARCHAR(20)      NOT NULL CHECK (role IN ('CUSTOMER', 'EMPLOYEE', 'ADMIN')),
     status        VARCHAR(20) DEFAULT 'active',
     created_at    TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
@@ -132,4 +131,24 @@ CREATE TABLE ticket
     status_ticket         VARCHAR(20)      NOT NULL CHECK (status_ticket IN ('VALID', 'USED', 'CANCELLED', 'EXPIRED')),
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE role (
+                      id   UUID PRIMARY KEY NOT NULL,
+                      name VARCHAR(50)      NOT NULL UNIQUE  -- ex: 'ROLE_ADMIN', 'ROLE_CUSTOMER'
+);
+
+CREATE TABLE user_role (
+                           user_id UUID NOT NULL REFERENCES "user"(id),
+                           role_id UUID NOT NULL REFERENCES role(id),
+                           PRIMARY KEY (user_id, role_id)
+);
+
+CREATE TABLE message (
+                         id          UUID PRIMARY KEY NOT NULL,
+                         sender_id   UUID NOT NULL REFERENCES "user"(id),
+                         receiver_id UUID NOT NULL REFERENCES "user"(id),
+                         content     TEXT NOT NULL,
+                         sent_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         read_at     TIMESTAMP
 );

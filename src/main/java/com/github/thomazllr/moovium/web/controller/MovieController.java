@@ -1,9 +1,8 @@
 package com.github.thomazllr.moovium.web.controller;
 
-import com.github.thomazllr.moovium.entity.Movie;
+import com.github.thomazllr.moovium.service.MovieService;
 import com.github.thomazllr.moovium.web.dto.movie.MovieRequest;
 import com.github.thomazllr.moovium.web.dto.movie.MovieResponse;
-import com.github.thomazllr.moovium.service.MovieService;
 import com.github.thomazllr.moovium.web.mapper.MovieMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

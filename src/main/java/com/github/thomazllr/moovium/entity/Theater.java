@@ -24,7 +24,7 @@ public class Theater {
 
     private String name;
 
-    private Integer capacity = 100;
+    private Integer capacity;
 
     @Enumerated(EnumType.STRING)
     private RoomType roomType;

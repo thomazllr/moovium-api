@@ -1,5 +1,6 @@
 package com.github.thomazllr.moovium.web.controller;
 
+import com.github.thomazllr.moovium.entity.Theater;
 import com.github.thomazllr.moovium.validator.TheaterValidator;
 import com.github.thomazllr.moovium.web.dto.theater.TheaterRequest;
 import com.github.thomazllr.moovium.web.dto.theater.TheaterResponse;
@@ -24,7 +25,7 @@ public class TheaterController {
 
     @PostMapping
     ResponseEntity<TheaterResponse> save(@RequestBody TheaterRequest request) {
-        var theater = service.create(mapper.toEntity(request));
+        var theater = service.create(TheaterRequest.toEntity(request));
         URI location = generateHeaderLocation(theater.getId());
         return ResponseEntity.created(location).body(mapper.toResponse(theater));
     }

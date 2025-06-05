@@ -25,7 +25,7 @@ public interface SeatRepository extends JpaRepository<Seat, UUID> {
         WHERE s.theater.id IN (
             SELECT sess.theater.id FROM Session sess WHERE sess.id = :sessionId
         )
-        ORDER BY s.row, s.seatNumber
+        ORDER BY s.row, CAST(s.seatNumber AS integer)
        \s""")
     List<SeatStatusProjection> findSeatStatusesBySessionId(@Param("sessionId") UUID sessionId);
 
