@@ -61,7 +61,7 @@ CREATE TABLE seat_reservation
     UNIQUE (session_id, seat_id)
 );
 
-CREATE TABLE "user"
+CREATE TABLE "users"
 (
     id            UUID PRIMARY KEY NOT NULL,
     email         VARCHAR(255)     NOT NULL UNIQUE,
@@ -78,8 +78,8 @@ CREATE TABLE "user"
 CREATE TABLE friendship
 (
     id         UUID PRIMARY KEY NOT NULL,
-    user_id_1  UUID             NOT NULL REFERENCES "user" (id),
-    user_id_2  UUID             NOT NULL REFERENCES "user" (id),
+    user_id_1  UUID             NOT NULL REFERENCES "users" (id),
+    user_id_2  UUID             NOT NULL REFERENCES "users" (id),
     status     VARCHAR(20)      NOT NULL CHECK (status IN ('PENDING', 'ACCEPTED', 'REJECTED')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -89,8 +89,8 @@ CREATE TABLE friendship
 CREATE TABLE movie_recommendation
 (
     id           UUID PRIMARY KEY NOT NULL,
-    from_user_id UUID             NOT NULL REFERENCES "user" (id),
-    to_user_id   UUID             NOT NULL REFERENCES "user" (id),
+    from_user_id UUID             NOT NULL REFERENCES "users" (id),
+    to_user_id   UUID             NOT NULL REFERENCES "users" (id),
     movie_id     UUID             NOT NULL REFERENCES movie (id),
     message      TEXT,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -102,7 +102,7 @@ CREATE TABLE session_group
 (
     id         UUID PRIMARY KEY NOT NULL,
     name       VARCHAR(255)     NOT NULL,
-    creator_id UUID             NOT NULL REFERENCES "user" (id),
+    creator_id UUID             NOT NULL REFERENCES "users" (id),
     session_id UUID             NOT NULL REFERENCES session (id),
     status     VARCHAR(20) CHECK (status IN ('PLANNING', 'CONFIRMED', 'CANCELLED')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -114,7 +114,7 @@ CREATE TABLE session_group_member
 (
     id         UUID PRIMARY KEY NOT NULL,
     group_id   UUID             NOT NULL REFERENCES session_group (id),
-    user_id    UUID             NOT NULL REFERENCES "user" (id),
+    user_id    UUID             NOT NULL REFERENCES "users" (id),
     status     VARCHAR(20) CHECK (status IN ('INVITED', 'ACCEPTED', 'DECLINED')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -125,7 +125,7 @@ CREATE TABLE ticket
 (
     id             UUID PRIMARY KEY NOT NULL,
     reservation_id UUID             NOT NULL REFERENCES seat_reservation (id),
-    user_id        UUID             NOT NULL REFERENCES "user"(id),
+    user_id        UUID             NOT NULL REFERENCES "users"(id),
     price          DECIMAL(18, 2)   NOT NULL,
     qr_code        text             NOT NULL,
     status_ticket         VARCHAR(20)      NOT NULL CHECK (status_ticket IN ('VALID', 'USED', 'CANCELLED', 'EXPIRED')),
@@ -139,15 +139,15 @@ CREATE TABLE role (
 );
 
 CREATE TABLE user_role (
-                           user_id UUID NOT NULL REFERENCES "user"(id),
+                           user_id UUID NOT NULL REFERENCES "users"(id),
                            role_id UUID NOT NULL REFERENCES role(id),
                            PRIMARY KEY (user_id, role_id)
 );
 
 CREATE TABLE message (
                          id          UUID PRIMARY KEY NOT NULL,
-                         sender_id   UUID NOT NULL REFERENCES "user"(id),
-                         receiver_id UUID NOT NULL REFERENCES "user"(id),
+                         sender_id   UUID NOT NULL REFERENCES "users"(id),
+                         receiver_id UUID NOT NULL REFERENCES "users"(id),
                          content     TEXT NOT NULL,
                          sent_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          read_at     TIMESTAMP

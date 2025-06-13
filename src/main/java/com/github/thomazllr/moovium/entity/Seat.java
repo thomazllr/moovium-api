@@ -40,4 +40,5 @@ public class Seat {
         this.seatNumber = seatNumber;
         this.row = row;
     }
+
 }

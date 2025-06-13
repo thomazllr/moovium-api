@@ -18,7 +18,7 @@ public class SessionSeatService {
     public List<SeatStatusDTO> getSeatStatusesForSession(String sessionId) {
         List<SeatStatusProjection> projections = seatRepository.findSeatStatusesBySessionId(UUID.fromString(sessionId));
         return projections.stream()
-                .map(SeatStatusDTO::toResponse)
+                .map(SeatStatusDTO::toDTO)
                 .toList();
     }
 }
